@@ -79,6 +79,9 @@ add_framework(CoreServices
 		iconv
 		Foundation
 		${EXTRA_LIBS}
+
+    CIRCULAR_DEPENDENCIES
+        AudioUnit
 )
 
 set(FSEvents_BUILD ${CMAKE_CURRENT_BINARY_DIR}/FSEvents)

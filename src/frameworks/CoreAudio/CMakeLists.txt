@@ -9,10 +9,14 @@ add_framework(CoreAudio
     VERSION "A"
 
     SOURCES
-        src/CoreAudio.m
+        src/AudioHardware.cpp
+        src/AudioHardwareImpl.cpp
+        src/AudioHardwareStream.cpp
 
     DEPENDENCIES
         system
         objc
+        cxx
         Foundation
+        CoreServices
 )

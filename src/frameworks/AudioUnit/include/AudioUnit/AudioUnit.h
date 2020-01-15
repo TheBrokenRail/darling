@@ -1,26 +1,47 @@
-/*
- This file is part of Darling.
+#ifndef AUDIOUNIT_H
+#define AUDIOUNIT_H
+#include <MacTypes.h>
+#include <CoreAudio/CoreAudioTypes.h>
+#include <AudioUnit/AUComponent.h>
 
- Copyright (C) 2019 Lubos Dolezel
+typedef AudioComponentInstance AudioUnit;
+typedef UInt32 AudioUnitRenderActionFlags;
+typedef UInt32 AudioUnitElement;
+typedef UInt32 AudioUnitScope;
+typedef UInt32 AudioUnitPropertyID;
 
- Darling is free software: you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation, either version 3 of the License, or
- (at your option) any later version.
+typedef OSStatus (*AURenderCallback) (void *inRefCon, AudioUnitRenderActionFlags *ioActionFlags, const AudioTimeStamp *inTimeStamp, UInt32 inBusNumber, UInt32 inNumberFrames, AudioBufferList *ioData);
 
- Darling is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
+enum {
+	kAudioUnitRenderAction_PreRender            = (1 << 2),
+	kAudioUnitRenderAction_PostRender           = (1 << 3),
+	kAudioUnitRenderAction_OutputIsSilence      = (1 << 4),
+	kAudioOfflineUnitRenderAction_Preflight     = (1 << 5),
+	kAudioOfflineUnitRenderAction_Render        = (1 << 6),
+	kAudioOfflineUnitRenderAction_Complete      = (1 << 7),
+	kAudioUnitRenderAction_PostRenderError      = (1 << 8),
+	kAudioUnitRenderAction_DoNotCheckRenderArgs = (1 << 9)
+};
 
- You should have received a copy of the GNU General Public License
- along with Darling.  If not, see <http://www.gnu.org/licenses/>.
-*/
+extern "C" {
 
+OSStatus AudioUnitInitialize(AudioUnit inUnit);
+OSStatus AudioUnitUninitialize(AudioUnit inUnit);
 
-#ifndef _AudioUnit_H_
-#define _AudioUnit_H_
+OSStatus AudioUnitAddRenderNotify(AudioUnit inUnit, AURenderCallback inProc, void* opaque);
+OSStatus AudioUnitRemoveRenderNotify(AudioUnit inUnit, AURenderCallback inProc, void* opaque);
 
-void* _Z5dummyv(void);
+OSStatus AudioUnitRender(AudioUnit inUnit, AudioUnitRenderActionFlags *ioActionFlags, const AudioTimeStamp *inTimeStamp, UInt32 inOutputBusNumber, UInt32 inNumberFrames, AudioBufferList *ioData);
+OSStatus AudioUnitReset(AudioUnit inUnit, AudioUnitScope inScope, AudioUnitElement inElement);
+
+OSStatus AudioUnitGetProperty(AudioUnit inUnit, AudioUnitPropertyID inID, AudioUnitScope inScope, AudioUnitElement inElement, void* outData, UInt32 *ioDataSize);
+OSStatus AudioUnitGetPropertyInfo(AudioUnit inUnit, AudioUnitPropertyID inID, AudioUnitScope inScope, AudioUnitElement inElement, UInt32 *outDataSize, Boolean *outWritable);
+OSStatus AudioUnitSetProperty(AudioUnit inUnit, AudioUnitPropertyID inID, AudioUnitScope inScope, AudioUnitElement inElement, const void *inData, UInt32 inDataSize);
+
+OSStatus AudioOutputUnitStart(AudioUnit inUnit);
+OSStatus AudioOutputUnitStop(AudioUnit inUnit);
+
+}
 
 #endif
+

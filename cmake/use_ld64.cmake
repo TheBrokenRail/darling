@@ -56,6 +56,12 @@ FUNCTION(use_ld64 target)
 -Wl,-dylib_file,/usr/lib/libssl.0.9.8.dylib:${CMAKE_BINARY_DIR}/src/external/openssl/src/libssl.0.9.8.dylib \
 -Wl,-dylib_file,/usr/lib/libcrypto.0.9.8.dylib:${CMAKE_BINARY_DIR}/src/external/openssl/src/libcrypto.0.9.8.dylib \
 -Wl,-dylib_file,/usr/lib/native/libGL.dylib:${CMAKE_BINARY_DIR}/src/native/libGL.dylib \
+-Wl,-dylib_file,/usr/lib/native/libasound.dylib:${CMAKE_BINARY_DIR}/src/frameworks/AudioUnit/libasound.dylib \
+-Wl,-dylib_file,/usr/lib/native/libpulse.dylib:${CMAKE_BINARY_DIR}/src/frameworks/AudioUnit/libpulse.dylib \
+-Wl,-dylib_file,/usr/lib/native/libavcodec.dylib:${CMAKE_BINARY_DIR}/src/frameworks/AudioToolbox/libavcodec.dylib \
+-Wl,-dylib_file,/usr/lib/native/libavresample.dylib:${CMAKE_BINARY_DIR}/src/frameworks/AudioToolbox/libavresample.dylib \
+-Wl,-dylib_file,/usr/lib/native/libavutil.dylib:${CMAKE_BINARY_DIR}/src/frameworks/AudioToolbox/libavutil.dylib \
+-Wl,-dylib_file,/usr/lib/darling/libelfloader.dylib:${CMAKE_BINARY_DIR}/src/libelfloader/libelfloader.dylib \
 -Wl,-dylib_file,/System/Library/Frameworks/CoreImage.framework/Versions/A/CoreImage:${CMAKE_BINARY_DIR}/src/frameworks/CoreImage/CoreImage \
 -Wl,-dylib_file,/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/FSEvents.framework/Versions/A/FSEvents:${CMAKE_BINARY_DIR}/src/frameworks/CoreServices/FSEvents \
 -Wl,-dylib_file,/System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/LaunchServices.framework/Versions/A/LaunchServices:${CMAKE_BINARY_DIR}/src/frameworks/CoreServices/LaunchServices \
@@ -93,6 +99,9 @@ FUNCTION(use_ld64 target)
 -Wl,-dylib_file,/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/SpeechSynthesis.framework/Versions/A/SpeechSynthesis\
 :${CMAKE_BINARY_DIR}/src/frameworks/ApplicationServices/SpeechSynthesis/SpeechSynthesis \
 -Wl,-dylib_file,/System/Library/Frameworks/CoreServices.framework/Versions/A/CoreServices:${CMAKE_BINARY_DIR}/src/frameworks/CoreServices/CoreServices \
+-Wl,-dylib_file,/System/Library/Frameworks/CoreAudio.framework/Versions/A/CoreAudio:${CMAKE_BINARY_DIR}/src/frameworks/CoreAudio/CoreAudio \
+-Wl,-dylib_file,/System/Library/Frameworks/AudioUnit.framework/Versions/A/AudioUnit:${CMAKE_BINARY_DIR}/src/frameworks/AudioUnit/AudioUnit \
+-Wl,-dylib_file,/System/Library/Frameworks/AudioToolbox.framework/Versions/A/AudioToolbox:${CMAKE_BINARY_DIR}/src/frameworks/AudioToolbox/AudioToolbox \
 -Wl,-dylib_file,/System/Library/Frameworks/ApplicationServices.framework/Versions/A/ApplicationServices:${CMAKE_BINARY_DIR}/src/frameworks/ApplicationServices/ApplicationServices \
 -Wl,-dylib_file,/System/Library/Frameworks/CoreGraphics.framework/Versions/A/CoreGraphics:${CMAKE_BINARY_DIR}/src/external/cocotron/CoreGraphics/CoreGraphics \
 -Wl,-dylib_file,/System/Library/Frameworks/CoreText.framework/Versions/A/CoreText:${CMAKE_BINARY_DIR}/src/external/cocotron/CoreText/CoreText \
